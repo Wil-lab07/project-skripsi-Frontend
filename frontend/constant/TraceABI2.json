@@ -1,0 +1,955 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "grantRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_ID_ProdukDistributor",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_nama",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_tanggal_pengolahan",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "_status_kehalalan",
+				"type": "bool"
+			}
+		],
+		"name": "inputMakanan",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_jenis_kelamin",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_tanggal_pemotongan",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "_status_kehalalan",
+				"type": "bool"
+			}
+		],
+		"name": "inputPemotongan",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_ID_ProdukRPH",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_tanggal_penyimpanan",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_tanggal_pengiriman",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_tanggal_penerimaan",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "_status_kehalalan",
+				"type": "bool"
+			}
+		],
+		"name": "inputProdukDistributor",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_ID_Pemotongan",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "_status_kehalalan",
+				"type": "bool"
+			}
+		],
+		"name": "inputProdukRPH",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "renounceRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "revokeRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_rph",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_distributor",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_rumahMakan",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "previousAdminRole",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "newAdminRole",
+				"type": "bytes32"
+			}
+		],
+		"name": "RoleAdminChanged",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			}
+		],
+		"name": "RoleGranted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			}
+		],
+		"name": "RoleRevoked",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "ID_Makanan",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "ID_ProdukDistributor",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "Akun_RumahMakan",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "nama",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "tanggal_pengolahan",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "status_kehalalan",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"name": "TraceMakanan",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "ID_Pemotongan",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "Akun_RPH",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "jenis_kelamin",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "tanggal_pemotongan",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "status_kehalalan",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"name": "TracePemotongan",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "ID_ProdukDistributor",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "ID_ProdukRPH",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "Akun_Distributor",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "tanggal_penyimpanan",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "tanggal_pengiriman",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "tanggal_penerimaan",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "status_kehalalan",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"name": "TraceProdukDistributor",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "ID_ProdukRPH",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "ID_Pemotongan",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "Akun_RPH",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "status_kehalalan",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"name": "TraceProdukRPH",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "DEFAULT_ADMIN_ROLE",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "DISTRIBUTOR",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			}
+		],
+		"name": "getRoleAdmin",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "role",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "hasRole",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "makanan",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "ID",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ID_ProdukDistributor",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "Akun_RumahMakan",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "nama",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tanggal_pengolahan",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "status_kehalalan",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "pemotongan",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "ID",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "Akun_RPH",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "jenis_kelamin",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tanggal_pemotongan",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "status_kehalalan",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "produkDistributor",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "ID",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ID_ProdukRPH",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "Akun_Distributor",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "tanggal_penyimpanan",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tanggal_pengiriman",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tanggal_penerimaan",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "status_kehalalan",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "produkRPH",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "ID",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "ID_Pemotongan",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "Akun_RPH",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "status_kehalalan",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "date",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "RPH",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "RUMAH_MAKAN",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes4",
+				"name": "interfaceId",
+				"type": "bytes4"
+			}
+		],
+		"name": "supportsInterface",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_ID_Makanan",
+				"type": "string"
+			}
+		],
+		"name": "traceDetail",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "ID",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "ID_ProdukDistributor",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "Akun_RumahMakan",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "nama",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "tanggal_pengolahan",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "status_kehalalan",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "date",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Trace.Makanan",
+				"name": "",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "ID",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "ID_ProdukRPH",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "Akun_Distributor",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "tanggal_penyimpanan",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "tanggal_pengiriman",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "tanggal_penerimaan",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "status_kehalalan",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "date",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Trace.ProdukDistributor",
+				"name": "",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "ID",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "ID_Pemotongan",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "Akun_RPH",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "status_kehalalan",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "date",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Trace.ProdukRPH",
+				"name": "",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "ID",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "Akun_RPH",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "jenis_kelamin",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "tanggal_pemotongan",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "status_kehalalan",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "date",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Trace.Pemotongan",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tracePemotongan",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "ID",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "Akun_RPH",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "jenis_kelamin",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "tanggal_pemotongan",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "status_kehalalan",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "date",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Trace.Pemotongan[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
