@@ -13,12 +13,18 @@ const Pemotongan : NextPage = () => {
   const { isConnected } = useAccount()
   const { push } = useRouter()
   const [ hasAccess, setHasAccess ] = useState(false)
+  const [active, setActive] = useState(false)
   
   useEffect(() => {
     if (!isConnected) {
       push('/login')
     }
+    setActive(true)
   }, [isConnected, push])
+
+  if(!active) {
+    return null
+  }
 
   return (
     <>

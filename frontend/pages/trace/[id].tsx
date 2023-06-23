@@ -21,17 +21,26 @@ const Spesific: NextPage = () => {
     const contract = new ethers.Contract(traceAddress, Trace.abi, TraceProvider)
     const [alur, setAlur] = useState([])
     const { isConnected } = useAccount()
+    const [active, setActive] = useState(false)
 
     const traceDetail = async (id: string | string[] | undefined) => {
-        const trace = await contract.traceSupplyChain(id)
-        setAlur(trace)
+        try {
+            const trace = await contract.traceSupplyChain(id)
+            setAlur(trace)
+        } catch(err) {
+            console.log(err)
+        }
     }
 
     useEffect(() => {
         traceDetail(id)
-        console.log(alur)
-    }, [])
+        setActive(true)
+    }, [id, traceDetail])
     
+    if(!active) {
+        return null
+    }
+
     return (
         <>
             {!isConnected ? 
@@ -55,7 +64,14 @@ const Spesific: NextPage = () => {
                     </Box>
                 </Box>
             }
-            {alur.length == 0 || alur[0][0] == '' ? 
+            {alur.length == 0 ? 
+                <>
+                    <Flex height={'100vh'} alignItems={'center'} justifyContent={'center'}>
+                        <Text color='white'>Loading</Text>
+                    </Flex>
+                </>
+            :
+            alur[0][0] == '' ?
                 <>
                     <Flex height={'100vh'} alignItems={'center'} justifyContent={'center'}>
                         <Text color='white'>Data Tidak Tersedia</Text>

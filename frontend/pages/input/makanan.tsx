@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useAccount } from 'wagmi';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { 
   Flex, 
   Box,
@@ -12,12 +12,18 @@ import FormMakanan from '../../components/formMakanan';
 const Makanan : NextPage = () => {
   const { isConnected } = useAccount()
   const { push } = useRouter()
+  const [active, setActive] = useState(false)
   
   useEffect(() => {
     if (!isConnected) {
       push('/login')
     }
+    setActive(true)
   }, [isConnected, push])
+
+  if(!active) {
+    return null
+  }
 
   return (
     <>

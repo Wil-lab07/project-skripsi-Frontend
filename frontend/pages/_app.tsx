@@ -11,7 +11,7 @@ import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
-  [infuraProvider({ apiKey: '84842078b09946638c03157f83405213' })],
+  [infuraProvider({ apiKey: '4458cf4d1689497b9a38b1d6bbf05e78' })],
 )
 
 const config = createConfig({

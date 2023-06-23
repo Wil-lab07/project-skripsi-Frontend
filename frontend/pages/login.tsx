@@ -23,16 +23,13 @@ const Login : NextPage = () => {
     const { address, isConnected } = useAccount()
     const { disconnect } = useDisconnect()
     const { connect, connectors, error, isLoading, pendingConnector } = useConnect()
+    const [active, setActive] = useState(false)
 
     const verify = async () => {
         if (isConnected) {
             const RPH = await contract.hasRole(accessRPH, address)
             const DISTRIBUTOR = await contract.hasRole(accessDISTRIBUTOR, address)
             const MAKANAN = await contract.hasRole(accessRUMAH_MAKAN, address)
-            console.log(address)
-            console.log(RPH)
-            console.log(DISTRIBUTOR)
-            console.log(MAKANAN)
             if (!RPH && !DISTRIBUTOR && !MAKANAN) {
                 disconnect()
                 toast.error('Maaf, akun anda tidak memiliki akses')
@@ -44,7 +41,12 @@ const Login : NextPage = () => {
 
     useEffect(() => {
         verify()
+        setActive(true)
     }, [address, isConnected])
+
+    if(!active) {
+        return null
+    }
     
     return (
         <>
