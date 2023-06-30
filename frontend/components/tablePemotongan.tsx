@@ -14,6 +14,10 @@ const TablePemotongan = () => {
       label: 'ID',
     },
     {
+      name: 'ID_Supplier',
+      label: 'ID Supply',
+    },
+    {
       name: 'Akun_RPH',
       label: 'Penginput',
       options: {
@@ -27,10 +31,6 @@ const TablePemotongan = () => {
           )
         }
       }
-    },
-    {
-      name: 'jenis_kelamin',
-      label: 'Jenis Kelamin',
     },
     {
       name: 'tanggal_pemotongan',

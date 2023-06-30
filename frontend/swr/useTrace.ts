@@ -5,7 +5,8 @@ import {
   TracePemotonganResult, 
   TraceProdukDistributorResult, 
   TraceProdukRPHResult, 
-  TraceRequest 
+  TraceRequest, 
+  TraceSupplierResult
 } from './types';
 import { traceAddress } from '../constant/metadata';
 import Trace from '../constant/TraceABI.json'
@@ -15,8 +16,11 @@ const TraceProvider = new ethers.InfuraProvider('maticmum')
 const TraceFetcher = (args: TraceRequest): Promise<Array<any>> => {
   const traceabilityContract = new ethers.Contract(traceAddress, Trace.abi, TraceProvider)
 
-  let filter = traceabilityContract.filters.TracePemotongan()
+  let filter = traceabilityContract.filters.TraceSupplier()
   switch (args.type) {
+    case 'supplier': 
+      filter = traceabilityContract.filters.TraceSupplier();
+      break;
     case 'pemotongan':
       filter = traceabilityContract.filters.TracePemotongan();
       break;
@@ -34,6 +38,54 @@ const TraceFetcher = (args: TraceRequest): Promise<Array<any>> => {
 
   return data;
 }
+
+export function useTraceSupplier() {
+  const { data, error } = useSWR<Array<any>, Error>(
+    {type: 'supplier'},
+    TraceFetcher
+  )
+
+  const result: Array<TraceSupplierResult> = 
+    data! && data?.map((item) => {
+      const date = Number(`${item.args?.date}`) * 1000;
+      const formattedDate = new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        minute: 'numeric',
+      }).format(date); 
+
+      const tanggal_pengiriman = new Date(item.args?.tanggal_pengiriman);
+      const formatted_tanggal_pengiriman = new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        minute: 'numeric',
+      }).format(tanggal_pengiriman);
+
+      const result: TraceSupplierResult = {
+        ID_Supplier: item.args?.ID_Supplier,
+        Akun_Supplier: item.args?.Akun_Supplier,
+        jenis_kelamin: item.args?.jenis_kelamin,
+        berat_sapi: item.args?.berat_sapi,
+        tanggal_pengiriman: formatted_tanggal_pengiriman,
+        status_kehalalan: item.args?.status_kehalalan,
+        date: formattedDate
+      }
+
+      return result;
+    })
+
+  return {
+    data: result,
+    isLoading: !data && !error,
+    error: error
+  }
+}
+
+// jenis_kelamin: item.args?.jenis_kelamin,
 
 export function useTracePemotongan() {
   const { data, error } = useSWR<Array<any>, Error>(
@@ -62,8 +114,8 @@ export function useTracePemotongan() {
 
     const result: TracePemotonganResult = {
       ID_Pemotongan: item.args?.ID_Pemotongan,
+      ID_Supplier: item.args?.ID_Supplier,
       Akun_RPH: item.args?.Akun_RPH,
-      jenis_kelamin: item.args?.jenis_kelamin,
       tanggal_pemotongan: formatted_tanggal_pemotongan,
       status_kehalalan: item.args?.status_kehalalan,
       date: formattedDate

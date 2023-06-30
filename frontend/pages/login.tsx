@@ -7,6 +7,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { 
     traceAddress,
+    accessSUPPLIER,
     accessRPH,
     accessDISTRIBUTOR,
     accessRUMAH_MAKAN,
@@ -27,10 +28,11 @@ const Login : NextPage = () => {
 
     const verify = async () => {
         if (isConnected) {
+            const SUPPLIER = await contract.hasRole(accessSUPPLIER, address)
             const RPH = await contract.hasRole(accessRPH, address)
             const DISTRIBUTOR = await contract.hasRole(accessDISTRIBUTOR, address)
             const MAKANAN = await contract.hasRole(accessRUMAH_MAKAN, address)
-            if (!RPH && !DISTRIBUTOR && !MAKANAN) {
+            if (!SUPPLIER && !RPH && !DISTRIBUTOR && !MAKANAN) {
                 disconnect()
                 toast.error('Maaf, akun anda tidak memiliki akses')
             } else {

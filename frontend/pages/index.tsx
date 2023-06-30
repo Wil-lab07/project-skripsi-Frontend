@@ -13,9 +13,10 @@ import TablePemotongan from '../components/tablePemotongan'
 import TableRPH from '../components/tableRPH'
 import TableDistributor from '../components/tableDistributor'
 import TableMakanan from '../components/tableMakanan'
+import TableSupplier from '../components/tableSupplier'
 
 const Home: NextPage = () => {
-  const [ dataType, setDataType ] = useState('pemotongan')
+  const [ dataType, setDataType ] = useState('supplier')
   const { isConnected } = useAccount()
   const [active, setActive] = useState(false)
 
@@ -53,6 +54,12 @@ const Home: NextPage = () => {
         <Flex>
           <HStack spacing="10px">
             <Button
+              colorScheme={dataType === 'supplier' ? 'purple' : 'gray'}
+              onClick={() => setDataType('supplier')}
+            >
+              Supplier
+            </Button>
+            <Button
               colorScheme={dataType === 'pemotongan' ? 'purple' : 'gray'}
               onClick={() => setDataType('pemotongan')}
             >
@@ -84,6 +91,7 @@ const Home: NextPage = () => {
           justifyContent={'center'}
           alignItems={'center'}
         >
+          {dataType === 'supplier' && <TableSupplier/>}
           {dataType === 'pemotongan' && <TablePemotongan/>}
           {dataType === 'rph' && <TableRPH/>}
           {dataType === 'distributor' && <TableDistributor/>}

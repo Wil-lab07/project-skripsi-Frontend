@@ -21,7 +21,7 @@ import Trace from '../constant/TraceABI.json'
 import 'react-toastify/dist/ReactToastify.css';
 
 interface PemotonganSubmit {
-  jenis_kelamin: string;
+  id_supplier: string;
   tanggal_pemotongan: string;
   status_kehalalan: string;
 }
@@ -30,7 +30,7 @@ interface CustomToastWithLinkProps {
   link: string;
 }
 
-const FormPemotongan = () => {
+const FormPemotongan : NextPage = () => {
   const { register, handleSubmit, control } = useForm<PemotonganSubmit>();
   const [ isLoading, setIsLoading ] = useState(false)
 
@@ -52,7 +52,7 @@ const FormPemotongan = () => {
     hash: inputData?.hash,
     confirmations: 1,
     onSuccess: () => {
-      console.timeEnd('writeAsync')
+      console.timeEnd('writeAsync') // Menghitung waktu transaksi
       setIsLoading(false)
       toast.success(customToastWithLink({link: `https://mumbai.polygonscan.com/tx/${inputData?.hash}`}))
     }
@@ -64,7 +64,7 @@ const FormPemotongan = () => {
       setIsLoading(true)
       await writeAsync({
         args: [
-          data.jenis_kelamin,
+          data.id_supplier,
           data.tanggal_pemotongan,
           data.status_kehalalan,
         ]
@@ -83,7 +83,7 @@ const FormPemotongan = () => {
         errorMessageReal = 'Anda tidak memiliki akses pada halaman ini'
       }
 
-      toast.error(`Input Pemotongan Gagal (${errorMessageReal})`)
+      toast.error(`Input Produk Distributor Gagal (${errorMessageReal})`)
     }
   }
 
@@ -91,28 +91,17 @@ const FormPemotongan = () => {
     <>
       <Box w="400px" borderRadius="10px" border="solid white">
         <form onSubmit={handleSubmit(sendTransaction)}>
-          <FormControl borderBottom="solid 1px gray" p={'20px'} my={'10px'}>
+          <FormControl isRequired borderBottom="solid 1px gray" p={'20px'} my={'10px'}>
             <FormLabel color="white">
-              Jenis Kelamin Sapi
+              ID Supply
             </FormLabel>
-            <Controller
-              name="jenis_kelamin"
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <RadioGroup 
-                  onChange={onChange} 
-                  value={value} 
-                  color="white"
-                  border="solid 1px gray"
-                  borderRadius={'5px'}
-                  p={'5px'}
-                >
-                  <HStack spacing="54px" >
-                    <Radio value="Jantan">Jantan</Radio>
-                    <Radio value="Betina">Betina</Radio>
-                  </HStack>  
-                </RadioGroup>
-              )}
+            <Input 
+              color="white" 
+              placeholder="Input ID Supply Yang Sudah Tersedia" 
+              size="md" 
+              type="text"
+              border="solid 1px gray"
+              {...register("id_supplier", { required: true })}
             />
           </FormControl>
           <FormControl borderBottom="solid 1px gray" p={'20px'} my={'10px'}>
@@ -132,7 +121,7 @@ const FormPemotongan = () => {
             <FormLabel color="white">
               Status Kehalalan
             </FormLabel>
-            <Checkbox {...register("status_kehalalan", { required: false })} color="white">Halal</Checkbox>
+            <Checkbox {...register("status_kehalalan", { required: false })} >Halal</Checkbox>
             <Text color="whiteAlpha.600">Status pada produk wajib halal</Text>
           </FormControl>
           <Button 

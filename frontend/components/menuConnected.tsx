@@ -26,6 +26,7 @@ const MenuConnected = () => {
       </MenuButton>
       <MenuList>
         <MenuItem onClick={()=> push('/')}>Home</MenuItem>
+        <MenuItem onClick={()=> push('/input/supply')}>Input Supply</MenuItem>
         <MenuItem onClick={()=> push('/input/pemotongan')}>Input Pemotongan</MenuItem>
         <MenuItem onClick={()=> push('/input/rph')}>Input RPH</MenuItem>
         <MenuItem onClick={()=> push('/input/distributor')}>Input Distributor</MenuItem>

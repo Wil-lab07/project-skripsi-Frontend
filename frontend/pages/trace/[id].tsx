@@ -13,6 +13,7 @@ import TraceMakanan from '../../components/traceMakanan';
 import TraceDistributor from '../../components/traceDistributor';
 import TraceRPH from '../../components/traceRPH';
 import TracePemotongan from '../../components/tracePemotongan';
+import TraceSupply from '../../components/traceSupply';
 
 const Spesific: NextPage = () => {
     const router = useRouter()
@@ -25,7 +26,7 @@ const Spesific: NextPage = () => {
 
     const traceDetail = async (id: string | string[] | undefined) => {
         try {
-            const trace = await contract.traceSupplyChain(id)
+            const trace = await contract.getRelatedData(id)
             setAlur(trace)
         } catch(err) {
             console.log(err)
@@ -92,6 +93,8 @@ const Spesific: NextPage = () => {
                         <TraceRPH data={alur[2]}/>
                         <ArrowDownwardRounded sx={{ fontSize: '70px' }} color='primary'/>
                         <TracePemotongan data={alur[3]}/>
+                        <ArrowDownwardRounded sx={{ fontSize: '70px' }} color='primary'/>
+                        <TraceSupply data={alur[4]}/>
                     </Flex>
                 </>
             }

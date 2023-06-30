@@ -1,11 +1,21 @@
 export type TraceRequest = {
-    type?: 'pemotongan' | 'rph' | 'distributor' | 'makanan';
+    type?: 'supplier' | 'pemotongan' | 'rph' | 'distributor' | 'makanan';
 }
   
+export type TraceSupplierResult = {
+    ID_Supplier: string,
+    Akun_Supplier: string,
+    jenis_kelamin: string,
+    berat_sapi: string,
+    tanggal_pengiriman: string,
+    status_kehalalan: boolean,
+    date: string
+}
+
 export type TracePemotonganResult = {
     ID_Pemotongan: string,
+    ID_Supplier: string,
     Akun_RPH: string,
-    jenis_kelamin: string,
     tanggal_pemotongan: string,
     status_kehalalan: boolean,
     date: string
