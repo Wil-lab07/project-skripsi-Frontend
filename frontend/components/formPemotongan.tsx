@@ -30,7 +30,7 @@ interface CustomToastWithLinkProps {
   link: string;
 }
 
-const FormPemotongan : NextPage = () => {
+const FormPemotongan = () => {
   const { register, handleSubmit, control } = useForm<PemotonganSubmit>();
   const [ isLoading, setIsLoading ] = useState(false)
 
